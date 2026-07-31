@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ローマの記憶 — 世界遺産を見て、ローマを巡る</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141a2e;          /* 夜藍・深い夜明け前の空 */
+  --ink-soft:#26304d;
+  --dawn:#e8a87c;         /* 夜明けのアプリコット */
+  --rose:#d98878;         /* ローズゴールド */
+  --gold:#c9a24b;         /* 金の装飾 */
+  --stone:#efe7d8;        /* トラバーチン(石灰岩) */
+  --stone-deep:#ded1ba;
+  --paper:#f7f1e6;        /* 羊皮紙 */
+  --mist:#f0ece3;
+  --text:#2a2d38;
+  --text-soft:#5c6070;
+  --shadow:rgba(20,26,46,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  color:var(--text);
+  background:var(--paper);
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.display{font-family:'Cormorant Garamond',serif}
+.roman{font-family:'Cinzel',serif;letter-spacing:.08em}
+img{display:block;max-width:100%}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;min-height:74svh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:2rem clamp(1.2rem,5vw,3rem);
+  color:var(--stone);overflow:hidden;background:#0f1424;
+}
+/* full-bleed panorama filling the viewport behind the text */
+.hero-map{
+  position:absolute;inset:0;width:100%;height:100%;
+  background-image:url('assets/hero_panorama.jpg');
+  background-size:cover;background-position:center center;background-repeat:no-repeat;
+  background-color:#0f1424;
+  will-change:transform;
+  transform:scale(1.06);
+  animation:heroDrift 22s ease-out forwards;
+}
+.hero-map.idle{animation:none}
+@keyframes heroDrift{
+  0%{transform:scale(1.14) translateY(-1.5%)}
+  100%{transform:scale(1.04) translateY(0)}
+}
+/* cinematic scrim: darken top & bottom, keep center airy for text */
+.hero-scrim{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(15,20,36,.62) 0%, rgba(15,20,36,.30) 30%, rgba(15,20,36,.42) 60%, rgba(15,20,36,.80) 100%),
+    radial-gradient(58% 46% at 50% 52%, rgba(10,13,26,.55) 0%, rgba(10,13,26,.15) 55%, transparent 80%)}
+.hero-glow{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(50% 38% at 50% 44%, rgba(232,168,124,.20), transparent 72%);
+  mix-blend-mode:screen}
+/* subtle film grain for premium texture */
+.hero-grain{position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.hero-inner{position:relative;z-index:2;max-width:920px;padding:1rem 0}
+/* logo mark as hero title */
+.hero-logo{margin:0;line-height:0;display:flex;justify-content:center}
+.hero-logo img{width:min(88vw,560px);height:auto;display:block;
+  filter:drop-shadow(0 8px 40px rgba(0,0,0,.55));
+  opacity:0;transform:translateY(14px) scale(.97);
+  animation:logoRise 1.5s cubic-bezier(.16,1,.3,1) .3s forwards}
+@keyframes logoRise{to{opacity:1;transform:translateY(0) scale(1)}}
+.eyebrow{font-family:'Cinzel',serif;font-size:clamp(.62rem,1.5vw,.8rem);letter-spacing:.5em;
+  color:var(--dawn);text-transform:uppercase;margin-bottom:1.8rem;padding-left:.5em;
+  opacity:0;animation:fadeUp 1s ease .2s forwards}
+
+/* Cinematic title: each character wrapped in .ch and revealed with a mask-slide */
+.hero h1.jp-title{font-family:'Cormorant Garamond','Zen Kaku Gothic New',serif;
+  font-weight:600;font-size:clamp(3rem,12vw,7.4rem);letter-spacing:.14em;
+  color:var(--stone);line-height:1;margin:0;
+  text-shadow:0 4px 60px rgba(0,0,0,.55);display:flex;justify-content:center;flex-wrap:wrap}
+.hero h1 .ch{display:inline-block;transform:translateY(1.15em) scale(.94);opacity:0;
+  filter:blur(12px);
+  animation:charRise 1.1s cubic-bezier(.16,1,.3,1) forwards}
+.hero h1 .gold{color:var(--gold)}
+
+.hero .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.15rem,3.2vw,1.75rem);color:var(--stone);margin-top:1.1rem;letter-spacing:.04em;
+  opacity:0;animation:fadeUp 1s ease 1.15s forwards;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.hero .sub-line{display:inline-block;position:relative;padding-bottom:.5rem}
+.hero .sub-line::after{content:'';position:absolute;left:50%;bottom:0;width:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  animation:lineGrow 1.2s ease 1.6s forwards}
+@keyframes lineGrow{to{width:120%;left:-10%}}
+
+.hero .tagline{margin-top:2.2rem;font-size:clamp(1rem,2.5vw,1.3rem);
+  font-weight:500;color:var(--stone);letter-spacing:.05em;
+  opacity:0;animation:fadeUp 1s ease 1.5s forwards;text-shadow:0 2px 24px rgba(0,0,0,.55)}
+.hero .tagline b{color:var(--dawn);font-weight:700}
+
+@keyframes charRise{
+  60%{filter:blur(0)}
+  to{transform:translateY(0) scale(1);opacity:1;filter:blur(0)}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+.scroll-cue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:.6rem;
+  color:var(--stone);font-size:.7rem;letter-spacing:.34em;
+  font-family:'Cinzel',serif;opacity:0;animation:fadeUp 1s ease 2s forwards}
+.scroll-cue .line{width:1px;height:46px;background:linear-gradient(var(--dawn),transparent);
+  animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);opacity:.4;transform-origin:top}
+  50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+/* ===== SECTION SHELL ===== */
+.section{padding:clamp(4rem,9vw,8rem) 0}
+.section-head{max-width:1200px;margin:0 auto clamp(2.2rem,4vw,3.4rem);
+  padding:0 clamp(1.4rem,5vw,3rem)}
+.section-num{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.3em;
+  color:var(--gold);display:block;margin-bottom:.9rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.1;color:var(--ink);letter-spacing:.01em}
+.section-title .it{font-style:italic;color:var(--rose)}
+.section-desc{margin-top:1rem;max-width:640px;color:var(--text-soft);font-size:1.02rem}
+
+/* ===== HORIZONTAL RAIL ===== */
+.rail-wrap{position:relative}
+.rail{display:flex;gap:clamp(1.2rem,3vw,2.2rem);overflow-x:auto;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  padding:1rem clamp(1.4rem,5vw,3rem) 2.4rem;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail::before,.rail::after{content:'';flex:0 0 max(0px,calc((100vw - 1200px)/2 - clamp(1.4rem,5vw,3rem)))}
+
+/* ===== HERITAGE CARD ===== */
+.card{flex:0 0 min(88vw,560px);scroll-snap-align:center;
+  background:var(--stone);border-radius:20px;overflow:hidden;
+  box-shadow:0 18px 50px -22px var(--shadow);
+  border:1px solid rgba(201,162,75,.18);
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.card:hover{transform:translateY(-6px);box-shadow:0 30px 60px -24px var(--shadow)}
+.card-img{position:relative;aspect-ratio:4/3;background:var(--stone-deep);overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.card:hover .card-img img{transform:scale(1.05)}
+.card-img .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:.5rem;color:var(--text-soft);
+  background:repeating-linear-gradient(45deg,#e4d8c0,#e4d8c0 12px,#ded1ba 12px,#ded1ba 24px)}
+.card-img .ph span{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;opacity:.7}
+.card-tag{position:absolute;top:1rem;left:1rem;z-index:2;
+  background:rgba(20,26,46,.72);color:var(--stone);
+  font-family:'Cinzel',serif;font-size:.64rem;letter-spacing:.18em;
+  padding:.4rem .8rem;border-radius:100px;backdrop-filter:blur(6px)}
+.card-body{padding:clamp(1.5rem,3vw,2.2rem)}
+.card-body .no{font-family:'Cinzel',serif;color:var(--gold);font-size:.74rem;letter-spacing:.24em}
+.card-body h3{font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.15;margin:.5rem 0 .2rem;color:var(--ink)}
+.card-body .jp{font-size:.95rem;color:var(--text-soft);margin-bottom:.9rem}
+.card-body .catch{font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.2rem;color:var(--rose);margin-bottom:1rem;line-height:1.4}
+.card-body p{font-size:.96rem;color:var(--text)}
+.card-meta{margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid rgba(201,162,75,.25);
+  display:flex;gap:1.4rem;flex-wrap:wrap}
+.card-meta div{font-size:.8rem;color:var(--text-soft)}
+.card-meta b{display:block;font-family:'Cinzel',serif;font-size:.7rem;
+  letter-spacing:.1em;color:var(--gold);margin-bottom:.15rem}
+
+/* rail controls */
+.rail-nav{display:flex;gap:.6rem;justify-content:flex-end;
+  max-width:1200px;margin:0 auto;padding:0 clamp(1.4rem,5vw,3rem)}
+.rail-nav button{width:52px;height:52px;border-radius:50%;
+  border:1px solid rgba(20,26,46,.2);background:var(--paper);color:var(--ink);
+  font-size:1.1rem;cursor:pointer;transition:all .3s;display:grid;place-items:center}
+.rail-nav button:hover{background:var(--ink);color:var(--stone);border-color:var(--ink)}
+.rail-nav button:focus-visible{outline:3px solid var(--dawn);outline-offset:2px}
+
+/* ===== BACKGROUND (why heritage) ===== */
+.why{background:
+  linear-gradient(180deg,#141a2e,#1c2embed 0,#1b2238 60%,#232b45);
+  background:linear-gradient(180deg,#141a2e 0%,#1b2238 55%,#232b45 100%);
+  color:var(--stone);position:relative;overflow:hidden}
+.why::before{content:'';position:absolute;inset:0;
+  background-image:url('assets/texture.jpg');background-size:cover;
+  opacity:.06;mix-blend-mode:screen}
+.why .section-num{color:var(--dawn)}
+.why .section-title{color:var(--stone)}
+.why-grid{max-width:1200px;margin:0 auto;padding:0 clamp(1.4rem,5vw,3rem);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.why-card{background:rgba(239,231,216,.04);border:1px solid rgba(201,162,75,.2);
+  border-radius:16px;padding:clamp(1.6rem,3vw,2.4rem);backdrop-filter:blur(4px);
+  transition:transform .5s,background .5s}
+.why-card:hover{transform:translateY(-5px);background:rgba(239,231,216,.07)}
+.why-card .crit{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;
+  color:var(--gold);margin-bottom:1rem}
+.why-card h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;
+  margin-bottom:.4rem;color:var(--stone)}
+.why-card .catch{font-style:italic;font-family:'Cormorant Garamond',serif;
+  color:var(--dawn);margin-bottom:.9rem;font-size:1.1rem}
+.why-card p{font-size:.94rem;color:var(--stone-deep)}
+.why-lead{max-width:1200px;margin:0 auto clamp(2.4rem,4vw,3.4rem);
+  padding:0 clamp(1.4rem,5vw,3rem)}
+.why-lead p{max-width:680px;font-size:clamp(1.05rem,2.4vw,1.25rem);color:var(--stone-deep);
+  font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.6}
+
+/* ===== PEOPLE ===== */
+.people{background:var(--mist)}
+.person{flex:0 0 min(80vw,380px);scroll-snap-align:center;
+  background:var(--paper);border-radius:18px;overflow:hidden;
+  box-shadow:0 16px 44px -22px var(--shadow);border:1px solid rgba(201,162,75,.16);
+  transition:transform .5s}
+.person:hover{transform:translateY(-6px)}
+.person-img{aspect-ratio:1/1;position:relative;background:var(--stone-deep);overflow:hidden}
+.person-img img{width:100%;height:100%;object-fit:cover}
+.person-img .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:var(--text-soft);background:radial-gradient(circle at 50% 40%,#e9dcc4,#d8c9ad)}
+.person-img .ph span{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em}
+.person-era{position:absolute;bottom:1rem;left:1rem;background:rgba(20,26,46,.74);
+  color:var(--stone);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;
+  padding:.35rem .75rem;border-radius:100px;backdrop-filter:blur(6px)}
+.person-body{padding:1.6rem}
+.person-body h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;color:var(--ink)}
+.person-body .role{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.16em;
+  color:var(--gold);margin:.3rem 0 1rem}
+.person-body p{font-size:.92rem;color:var(--text)}
+.person-body .link{margin-top:1rem;font-size:.82rem;color:var(--rose);font-style:italic;
+  font-family:'Cormorant Garamond',serif}
+
+/* ===== FINALE / next section ===== */
+.finale{background:linear-gradient(180deg,#232b45,#141a2e);color:var(--stone);
+  text-align:center;padding:clamp(5rem,10vw,9rem) 1.5rem}
+.finale .quote{font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.6rem,5vw,3rem);line-height:1.3;max-width:760px;margin:0 auto;color:var(--stone)}
+.finale .quote b{color:var(--dawn);font-style:normal;font-weight:600}
+.finale .sig{margin-top:2.4rem;font-family:'Cinzel',serif;font-size:.76rem;
+  letter-spacing:.3em;color:var(--gold)}
+.finale .latin{margin-top:.6rem;font-family:'Cormorant Garamond',serif;font-style:italic;
+  color:var(--stone-deep);font-size:1rem}
+
+/* ===== PLANNING PLACEHOLDER (co-design) ===== */
+.plan{background:var(--paper);text-align:center;padding:clamp(3rem,6vw,5rem) 1.5rem}
+.plan .box{max-width:720px;margin:0 auto;border:1.5px dashed rgba(201,162,75,.5);
+  border-radius:18px;padding:clamp(2rem,5vw,3.2rem)}
+.plan h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--ink);margin-bottom:.8rem}
+.plan p{color:var(--text-soft);max-width:520px;margin:0 auto}
+.plan .ideas{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:1.6rem}
+.plan .chip{background:var(--stone);border:1px solid rgba(201,162,75,.3);border-radius:100px;
+  padding:.5rem 1.1rem;font-size:.85rem;color:var(--ink-soft)}
+
+footer{background:var(--ink);color:var(--stone-deep);text-align:center;
+  padding:2.6rem 1.5rem;font-size:.82rem}
+footer .roman{color:var(--gold);font-size:1.1rem;margin-bottom:.5rem}
+
+/* ===== TIMELINE (past→present→future) ===== */
+.timeline{background:linear-gradient(180deg,#1b2238 0%,#141a2e 100%);
+  color:var(--stone);position:relative;overflow:hidden}
+.timeline .section-num{color:var(--dawn)}
+.timeline .section-title{color:var(--stone)}
+.timeline .section-desc{color:var(--stone-deep)}
+.tl-track{max-width:1200px;margin:0 auto;padding:1rem clamp(1.4rem,5vw,3rem) 0;
+  position:relative}
+.tl-line{position:absolute;left:0;right:0;top:56px;height:2px;
+  background:linear-gradient(90deg,rgba(201,162,75,.1),var(--gold),rgba(232,168,124,.6),rgba(201,162,75,.1));
+  margin:0 clamp(1.4rem,5vw,3rem)}
+.tl-steps{display:flex;gap:clamp(1.2rem,3vw,2rem);overflow-x:auto;
+  scroll-snap-type:x mandatory;padding-bottom:2.4rem;scrollbar-width:none}
+.tl-steps::-webkit-scrollbar{display:none}
+.tl-step{flex:0 0 min(84vw,360px);scroll-snap-align:center;position:relative;padding-top:96px}
+.tl-dot{position:absolute;top:44px;left:calc(50% - 13px);width:26px;height:26px;border-radius:50%;
+  background:var(--ink);border:3px solid var(--gold);z-index:2;
+  display:grid;place-items:center;transition:all .5s}
+.tl-dot::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--dawn)}
+.tl-step:hover .tl-dot{transform:scale(1.15);box-shadow:0 0 0 8px rgba(201,162,75,.12)}
+.tl-year{text-align:center;font-family:'Cinzel',serif;letter-spacing:.14em;
+  font-size:.82rem;color:var(--dawn);margin-bottom:1.1rem}
+.tl-card{background:rgba(239,231,216,.05);border:1px solid rgba(201,162,75,.22);
+  border-radius:16px;overflow:hidden;transition:transform .5s,background .5s}
+.tl-step:hover .tl-card{transform:translateY(-6px);background:rgba(239,231,216,.08)}
+.tl-img{aspect-ratio:16/10;background:var(--ink-soft);position:relative;overflow:hidden}
+.tl-img img{width:100%;height:100%;object-fit:cover}
+.tl-img .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:var(--stone-deep);font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.16em;
+  background:repeating-linear-gradient(45deg,#222a44,#222a44 12px,#1c2338 12px,#1c2338 24px)}
+.tl-body{padding:1.5rem}
+.tl-era{font-family:'Cinzel',serif;font-size:.64rem;letter-spacing:.2em;color:var(--gold);margin-bottom:.5rem}
+.tl-body h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;
+  color:var(--stone);margin-bottom:.6rem;line-height:1.2}
+.tl-body p{font-size:.92rem;color:var(--stone-deep)}
+.tl-note{max-width:1200px;margin:1.5rem auto 0;padding:0 clamp(1.4rem,5vw,3rem);
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--dawn)}
+
+/* ===== THEME SONG ===== */
+.song{background:linear-gradient(180deg,#141a2e 0%,#1b2238 100%);color:var(--stone);
+  position:relative;overflow:hidden}
+.song::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(70% 50% at 50% 0%,rgba(232,168,124,.14),transparent 60%)}
+.song .section-num{color:var(--dawn)}
+.song .section-title{color:var(--stone)}
+.song-wrap{max-width:900px;margin:0 auto;padding:0 clamp(1.4rem,5vw,3rem);position:relative;z-index:2}
+.pv-frame{border-radius:20px;overflow:hidden;border:1px solid rgba(201,162,75,.3);
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.6);background:#000;line-height:0;position:relative}
+.pv-frame video{width:100%;display:block;aspect-ratio:16/9;background:#000}
+.pv-frame iframe{width:100%;display:block;aspect-ratio:16/9;border:0;background:#000}
+/* custom click-to-play poster (chosen frame from the video) */
+.pv-poster{position:relative;display:block;width:100%;aspect-ratio:16/9;
+  background-size:cover;background-position:center 42%;background-color:#0f1424;
+  cursor:pointer;border:0;padding:0;overflow:hidden}
+.pv-poster::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 50%, rgba(0,0,0,.05), rgba(0,0,0,.42) 100%)}
+.pv-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;pointer-events:none;
+  width:clamp(64px,15vw,88px);height:clamp(64px,15vw,88px);border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(15,20,36,.55);border:1.5px solid rgba(201,162,75,.85);
+  backdrop-filter:blur(4px);box-shadow:0 10px 40px -8px rgba(0,0,0,.7);
+  transition:transform .3s ease, background .3s ease}
+.pv-poster:hover .pv-play{transform:translate(-50%,-50%) scale(1.08);background:rgba(201,162,75,.9)}
+.pv-play svg{width:42%;height:42%;fill:var(--gold);margin-left:8%;transition:fill .3s ease}
+.pv-poster:hover .pv-play svg{fill:#0f1424}
+.pv-play-label{position:absolute;left:50%;bottom:clamp(.9rem,3vw,1.4rem);transform:translateX(-50%);z-index:2;pointer-events:none;
+  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.28em;color:var(--stone);
+  text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+.pv-caption{text-align:center;margin-top:1.4rem}
+.pv-caption .track{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.2em;color:var(--gold);margin-bottom:.5rem}
+.pv-caption h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1.5rem,4vw,2.1rem);
+  color:var(--stone);line-height:1.15;margin-bottom:.2rem}
+.pv-caption .meta{font-size:.86rem;color:var(--stone-deep)}
+.song-note{margin-top:1.4rem;font-size:.84rem;color:var(--stone-deep);text-align:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic}
+/* heritage explanation block under the PV */
+.whc{max-width:820px;margin:clamp(3rem,7vw,5rem) auto 0;padding:0 clamp(1.4rem,5vw,3rem);
+  position:relative;z-index:2}
+.whc-head{text-align:center;margin-bottom:clamp(2rem,4vw,3rem)}
+.whc-eyebrow{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.28em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:.9rem}
+.whc-title{font-family:'Cormorant Garamond','Zen Kaku Gothic New',serif;font-weight:600;
+  font-size:clamp(1.7rem,5vw,2.6rem);color:var(--stone);line-height:1.25;letter-spacing:.02em}
+.whc-lead{max-width:640px;margin:1.1rem auto 0;font-size:clamp(.92rem,2.4vw,1rem);
+  line-height:1.9;color:var(--stone-deep)}
+.whc-list{display:flex;flex-direction:column;gap:clamp(1.1rem,2.6vw,1.6rem)}
+.whc-item{border:1px solid rgba(201,162,75,.22);border-radius:16px;
+  background:rgba(20,26,46,.4);padding:clamp(1.2rem,3.4vw,1.8rem);
+  backdrop-filter:blur(2px)}
+.whc-item h4{font-family:'Cormorant Garamond','Zen Kaku Gothic New',serif;font-weight:600;
+  font-size:clamp(1.15rem,3.4vw,1.45rem);color:var(--stone);margin-bottom:.2rem;
+  display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+.whc-item h4 .lat{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;
+  color:var(--gold);text-transform:uppercase}
+.whc-item p{font-size:clamp(.9rem,2.4vw,.98rem);line-height:1.85;color:var(--stone-deep);margin-top:.5rem}
+.whc-item .crit{margin-top:.9rem;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.14em;
+  color:var(--dawn);text-transform:uppercase;opacity:.9}
+.whc-foot{margin-top:clamp(2rem,4vw,2.8rem);text-align:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--dawn)}
+/* ===== ROME CHARM: immersive facts ===== */
+.charm{position:relative;max-width:960px;margin:clamp(3.5rem,8vw,6rem) auto 0;
+  padding:0 clamp(1.4rem,5vw,3rem);z-index:2}
+.charm-hook{text-align:center;margin-bottom:clamp(2.6rem,6vw,4rem)}
+.charm-hook .kicker{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.34em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+.charm-hook h2{font-family:'Cormorant Garamond','Zen Kaku Gothic New',serif;font-weight:700;
+  font-size:clamp(2rem,7vw,3.4rem);line-height:1.18;color:var(--stone);letter-spacing:.02em}
+.charm-hook h2 .g{color:var(--gold)}
+.charm-hook p{max-width:600px;margin:1.4rem auto 0;font-size:clamp(.95rem,2.5vw,1.08rem);
+  line-height:1.95;color:var(--stone-deep)}
+/* stat strip */
+.charm-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.6rem,2vw,1.4rem);
+  margin:clamp(2rem,5vw,3.2rem) 0}
+.stat{text-align:center;padding:clamp(1rem,2.5vw,1.6rem) .4rem;
+  border:1px solid rgba(201,162,75,.22);border-radius:14px;background:rgba(20,26,46,.4)}
+.stat .num{font-family:'Cormorant Garamond',serif;font-weight:700;
+  font-size:clamp(1.8rem,7vw,3rem);color:var(--gold);line-height:1}
+.stat .num .u{font-size:.44em;color:var(--stone);margin-left:.15em}
+.stat .lbl{margin-top:.5rem;font-size:clamp(.68rem,2vw,.8rem);color:var(--stone-deep);line-height:1.4}
+/* fact cards */
+.facts{display:flex;flex-direction:column;gap:clamp(1rem,2.6vw,1.5rem)}
+.fact{position:relative;border:1px solid rgba(201,162,75,.2);border-radius:18px;
+  background:linear-gradient(180deg,rgba(27,34,56,.55),rgba(20,26,46,.35));
+  padding:clamp(1.3rem,3.6vw,2rem);overflow:hidden}
+.fact::before{content:attr(data-n);position:absolute;top:-.3em;right:.1em;
+  font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(4.5rem,16vw,7rem);
+  color:rgba(201,162,75,.09);line-height:1;pointer-events:none}
+.fact .tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;color:var(--dawn);
+  text-transform:uppercase;margin-bottom:.6rem}
+.fact h3{font-family:'Cormorant Garamond','Zen Kaku Gothic New',serif;font-weight:600;
+  font-size:clamp(1.25rem,4vw,1.7rem);color:var(--stone);line-height:1.3;margin-bottom:.6rem;
+  position:relative;z-index:1}
+.fact p{font-size:clamp(.9rem,2.4vw,1rem);line-height:1.9;color:var(--stone-deep);
+  position:relative;z-index:1}
+.fact p .hl{color:var(--gold);font-weight:600}
+.charm-close{margin-top:clamp(2.6rem,6vw,4rem);text-align:center;
+  padding:clamp(1.8rem,4vw,2.6rem) 1rem;
+  border-top:1px solid rgba(201,162,75,.25);border-bottom:1px solid rgba(201,162,75,.25)}
+.charm-close p{font-family:'Cormorant Garamond','Zen Kaku Gothic New',serif;
+  font-size:clamp(1.3rem,4.4vw,2rem);line-height:1.5;color:var(--stone);font-weight:600}
+.charm-close .sig{margin-top:1rem;font-family:'Cinzel',serif;font-size:.64rem;
+  letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+@media(max-width:560px){
+  .charm-stats{grid-template-columns:1fr;gap:.7rem}
+  .stat{display:flex;align-items:center;justify-content:center;gap:.8rem;text-align:left;padding:1rem 1.2rem}
+  .stat .lbl{margin-top:0}
+}
+/* lyric hook chips */
+.hooks{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:2.4rem}
+.hook{background:rgba(232,168,124,.12);border:1px solid rgba(232,168,124,.3);
+  color:var(--dawn);border-radius:100px;padding:.5rem 1.1rem;font-size:.9rem;
+  font-weight:500;letter-spacing:.02em}
+
+/* ===== BUILDING SHOWCASE (transparent buildings, swipe) ===== */
+.showcase{position:relative;background:
+    radial-gradient(120% 80% at 50% 0%, rgba(232,168,124,.14), transparent 55%),
+    linear-gradient(180deg,#141a2e 0%,#1b2238 55%,#232b45 100%);
+  color:var(--stone);overflow:hidden;padding:clamp(1rem,2vw,1.6rem) 0 clamp(3rem,6vw,5rem)}
+.showcase::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.showcase-eyebrow{text-align:center;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.4em;
+  color:var(--dawn);text-transform:uppercase;margin-bottom:.6rem}
+/* heading for each slider section */
+.sc-head{text-align:center;max-width:1000px;margin:0 auto clamp(1.4rem,3vw,2.2rem);
+  padding:0 clamp(1.2rem,4vw,2rem)}
+.sc-head .eye{font-family:'Cinzel',serif;font-size:.64rem;letter-spacing:.32em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:.7rem}
+.sc-head h2{font-family:'Cormorant Garamond','Zen Kaku Gothic New',serif;font-weight:600;
+  font-size:clamp(1.6rem,4.6vw,2.4rem);color:var(--stone);line-height:1.2;letter-spacing:.03em}
+.sc-head .rule{width:44px;height:2px;margin:1rem auto 0;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.showcase-viewport{position:relative;max-width:1000px;margin:0 auto;
+  min-height:clamp(460px,68vh,640px);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:0 clamp(1.2rem,4vw,2rem);
+  touch-action:pan-y;user-select:none}
+/* stage where buildings float */
+.stage{position:relative;width:100%;height:clamp(200px,30vh,300px);
+  display:flex;align-items:flex-end;justify-content:center}
+.b-slide{position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  height:100%;display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1)}
+.b-slide img{height:100%;width:auto;max-width:92%;object-fit:contain;
+  filter:drop-shadow(0 24px 30px rgba(0,0,0,.45));
+  animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.b-slide.active{opacity:1;pointer-events:auto}
+.b-slide.active.anim{animation:slideIn .7s cubic-bezier(.2,.7,.2,1)}
+@keyframes slideIn{from{opacity:0;transform:translateX(calc(-50% + 40px)) scale(.96)}
+  to{opacity:1;transform:translateX(-50%) scale(1)}}
+/* soft ground glow under building */
+.stage::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
+  width:min(70%,420px);height:44px;border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(201,162,75,.32), transparent 70%);
+  filter:blur(6px)}
+/* number watermark */
+.b-num{position:absolute;top:-8%;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-weight:600;font-size:clamp(6rem,20vw,12rem);
+  color:rgba(239,231,216,.06);line-height:1;pointer-events:none;z-index:0;letter-spacing:.05em}
+/* text block */
+.b-text{position:relative;z-index:2;text-align:center;margin-top:clamp(-.6rem,-1vw,-.2rem);
+  max-width:620px}
+.b-text .roman-name{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.22em;color:var(--gold);margin-bottom:.5rem}
+.b-text h3{font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.1;color:var(--stone);margin-bottom:.3rem}
+.b-text .jp{font-size:.92rem;color:var(--stone-deep);margin-bottom:.9rem}
+.b-text .catch{font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.1rem,2.6vw,1.35rem);color:var(--dawn);margin-bottom:.8rem}
+.b-text p{font-size:.98rem;color:var(--stone-deep);line-height:1.75}
+/* details button */
+.b-more{margin-top:1.1rem;display:inline-flex;align-items:center;gap:.5em;
+  font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);background:transparent;border:1px solid rgba(201,162,75,.5);
+  border-radius:999px;padding:.68em 1.5em;cursor:pointer;
+  transition:background .3s ease,color .3s ease,border-color .3s ease}
+.b-more:hover{background:rgba(201,162,75,.14);border-color:var(--gold)}
+.b-more .arr{transition:transform .3s ease}
+.b-more:hover .arr{transform:translateX(3px)}
+/* ===== detail page (full-screen overlay) ===== */
+.detail-modal{position:fixed;inset:0;z-index:100;
+  background:linear-gradient(180deg,#0f1424 0%,#141a2e 40%,#1b2238 100%);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  opacity:0;visibility:hidden;transform:translateY(24px);
+  transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1),visibility .45s}
+.detail-modal.open{opacity:1;visibility:visible;transform:translateY(0)}
+.dm-bar{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;
+  padding:1rem clamp(1.2rem,5vw,2rem);
+  background:linear-gradient(180deg,rgba(15,20,36,.96),rgba(15,20,36,.6) 70%,transparent);
+  backdrop-filter:blur(6px)}
+.dm-bar .brand{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.28em;
+  color:var(--gold);text-transform:uppercase}
+.dm-close{width:42px;height:42px;border-radius:50%;border:1px solid rgba(201,162,75,.4);
+  background:rgba(20,26,46,.6);color:var(--stone);font-size:1.3rem;line-height:1;cursor:pointer;
+  display:grid;place-items:center;transition:background .3s ease,transform .3s ease}
+.dm-close:hover{background:rgba(201,162,75,.9);color:#0f1424;transform:rotate(90deg)}
+.dm-inner{max-width:720px;margin:0 auto;padding:0 clamp(1.4rem,5vw,2.4rem) clamp(3rem,8vw,5rem)}
+.dm-hero{text-align:center;padding:clamp(.5rem,2vw,1.5rem) 0 clamp(1.6rem,4vw,2.4rem)}
+.dm-hero img{width:min(58vw,260px);height:auto;
+  filter:drop-shadow(0 18px 44px rgba(0,0,0,.55));
+  animation:dmFloat 6s ease-in-out infinite}
+@keyframes dmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.dm-eyebrow{font-family:'Cinzel',serif;font-size:.64rem;letter-spacing:.28em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:.7rem}
+.dm-title{font-family:'Cormorant Garamond','Zen Kaku Gothic New',serif;font-weight:600;
+  font-size:clamp(2rem,7vw,3rem);color:var(--stone);line-height:1.15}
+.dm-sub{margin-top:.4rem;font-size:.9rem;color:var(--stone-deep)}
+.dm-catch{margin-top:1.2rem;font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.2rem,3.6vw,1.6rem);color:var(--dawn)}
+.dm-divider{width:44px;height:2px;margin:clamp(1.6rem,4vw,2.4rem) auto;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.dm-body p{font-size:clamp(.96rem,2.5vw,1.05rem);line-height:1.95;color:var(--stone);
+  text-align:left;opacity:.92}
+.dm-body p + p{margin-top:1.1rem}
+.dm-facts{margin-top:clamp(1.8rem,4vw,2.6rem);border:1px solid rgba(201,162,75,.22);
+  border-radius:16px;background:rgba(20,26,46,.4);padding:clamp(1.2rem,3.4vw,1.8rem)}
+.dm-facts h5{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:.9rem}
+.dm-facts dl{display:grid;grid-template-columns:auto 1fr;gap:.55rem 1.1rem;
+  font-size:.92rem;line-height:1.6}
+.dm-facts dt{color:var(--dawn);white-space:nowrap}
+.dm-facts dd{color:var(--stone-deep);margin:0}
+body.modal-open{overflow:hidden}
+/* animate text on change (direct children only) */
+.b-text>.roman-name,.b-text>h3,.b-text>.jp,.b-text>.catch,.b-text>p{opacity:0;transform:translateY(12px);animation:textUp .6s ease forwards}
+.b-text .roman-name{animation-delay:.05s}.b-text h3{animation-delay:.12s}
+.b-text .jp{animation-delay:.18s}.b-text .catch{animation-delay:.24s}.b-text p{animation-delay:.3s}
+@keyframes textUp{to{opacity:1;transform:translateY(0)}}
+/* controls */
+.b-controls{display:flex;align-items:center;justify-content:center;gap:1.4rem;margin-top:clamp(1.4rem,3vw,2.2rem)}
+.b-arrow{width:52px;height:52px;border-radius:50%;border:1px solid rgba(201,162,75,.4);
+  background:rgba(239,231,216,.05);color:var(--stone);font-size:1.2rem;cursor:pointer;
+  display:grid;place-items:center;transition:all .3s;backdrop-filter:blur(4px)}
+.b-arrow:hover{background:var(--gold);color:var(--ink);border-color:var(--gold);transform:scale(1.08)}
+.b-arrow:focus-visible{outline:3px solid var(--dawn);outline-offset:2px}
+.b-dots{display:flex;gap:.6rem}
+.b-dot{width:9px;height:9px;border-radius:50%;background:rgba(239,231,216,.25);
+  cursor:pointer;transition:all .3s;padding:0;border:none}
+.b-dot.on{background:var(--gold);width:26px;border-radius:100px}
+.b-hint{text-align:center;margin-top:1.1rem;font-family:'Cinzel',serif;font-size:.64rem;
+  letter-spacing:.24em;color:var(--stone-deep);opacity:.7}
+@media(max-width:640px){
+  .b-slide img{max-width:82%}
+  .b-hint .desktop-only{display:none}
+}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+@media(max-width:640px){
+  .card-meta{gap:1rem}
+  .rail-nav{display:none}
+  /* hero: prevent title wrap-break and tagline/scroll overlap on phones */
+  .hero{padding:2rem 1.4rem;justify-content:center;min-height:74svh}
+  .hero h1.jp-title{font-size:clamp(2.2rem,12.5vw,4rem);letter-spacing:.02em;
+    flex-wrap:nowrap;white-space:nowrap}
+  .hero .sub{font-size:clamp(1rem,4.6vw,1.4rem)}
+  .hero .tagline{margin-top:1.6rem;font-size:clamp(.95rem,4vw,1.2rem)}
+  .scroll-cue{bottom:1.4rem}
+}
+@media(max-width:640px) and (max-height:740px){
+  /* very short viewports: hide scroll cue so it never collides with text */
+  .scroll-cue{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-map" id="heroMap">
+    <div class="hero-scrim"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-grain"></div>
+  </div>
+  <div class="hero-inner">
+    <h1 class="hero-logo" id="heroLogo" aria-label="ローマの記憶">
+      <img src="assets/hero_logo.png" alt="ローマの記憶" decoding="async">
+    </h1>
+    <div class="sub"><span class="sub-line">世界遺産を見て、ローマを巡る</span></div>
+  </div>
+</header>
+
+<!-- ===== BUILDING SHOWCASE ===== -->
+<section class="showcase" id="showcase">
+  <div class="sc-head reveal">
+    <div class="eye">World Heritage</div>
+    <h2>世界遺産リスト</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="showcase-viewport" id="scViewport">
+    <div class="stage">
+      <div class="b-num" id="bNum">01</div>
+      <div class="b-slide active" data-i="0">
+        <img src="assets/w_colosseo.png" alt="コロッセオ">
+      </div>
+      <div class="b-slide" data-i="1">
+        <img src="assets/w_titus.png" alt="ティトゥスの凱旋門">
+      </div>
+      <div class="b-slide" data-i="2">
+        <img src="assets/w_sanpietro.png" alt="サン・ピエトロ大聖堂">
+      </div>
+      <div class="b-slide" data-i="3"><img src="assets/w_pantheon.png" alt="パンテオン" loading="lazy" decoding="async"></div>
+      <div class="b-slide" data-i="4"><img src="assets/w_sanpaolo.png" alt="サン・パオロ・フオーリ・レ・ムーラ聖堂" loading="lazy" decoding="async"></div>
+      <div class="b-slide" data-i="5"><img src="assets/w_foro.png" alt="フォロ・ロマーノ" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="b-text" id="bText"></div>
+    <div class="b-controls">
+      <button class="b-arrow" id="bPrev" aria-label="前の世界遺産">&#8249;</button>
+      <div class="b-dots" id="bDots"><button class="b-dot on" data-i="0" aria-label="コロッセオ"></button><button class="b-dot" data-i="1" aria-label="ティトゥスの凱旋門"></button><button class="b-dot" data-i="2" aria-label="サン・ピエトロ大聖堂"></button><button class="b-dot" data-i="3" aria-label="パンテオン"></button><button class="b-dot" data-i="4" aria-label="サン・パオロ聖堂"></button><button class="b-dot" data-i="5" aria-label="フォロ・ロマーノ"></button></div>
+      <button class="b-arrow" id="bNext" aria-label="次の世界遺産">&#8250;</button>
+    </div>
+    <div class="b-hint"><span class="desktop-only">DRAG · </span>SWIPE ← →</div>
+  </div>
+</section>
+
+
+
+
+
+<!-- ===== PEOPLE SHOWCASE ===== -->
+<section class="showcase people-showcase" id="people">
+  <div class="sc-head reveal">
+    <div class="eye">Related Figures</div>
+    <h2>関連する人物</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="showcase-viewport" id="pplViewport">
+    <div class="stage">
+      <div class="b-num" id="pplNum">01</div>
+      <div class="b-slide active" data-i="0">
+        <img src="assets/p_pietro.png" alt="使徒ペテロ" loading="eager" decoding="sync" fetchpriority="high">
+      </div>
+      <div class="b-slide" data-i="1">
+        <img src="assets/p_paolo.png" alt="使徒パウロ" loading="eager" decoding="async">
+      </div>
+      <div class="b-slide" data-i="2"><img src="assets/p_constantine.png" alt="皇帝コンスタンティヌス" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="b-text" id="pplText"></div>
+    <div class="b-controls">
+      <button class="b-arrow" id="pplPrev" aria-label="前の人物">&#8249;</button>
+      <div class="b-dots" id="pplDots"><button class="b-dot on" data-i="0" aria-label="使徒ペテロ"></button><button class="b-dot" data-i="1" aria-label="使徒パウロ"></button><button class="b-dot" data-i="2" aria-label="皇帝コンスタンティヌス"></button></div>
+      <button class="b-arrow" id="pplNext" aria-label="次の人物">&#8250;</button>
+    </div>
+    <div class="b-hint"><span class="desktop-only">DRAG · </span>SWIPE ← →</div>
+  </div>
+</section>
+
+
+
+<!-- ===== THEME SONG ===== -->
+<section class="section song" id="song">
+  <div class="song-wrap reveal">
+    <div class="pv-frame" id="pvFrame">
+      <div class="pv-poster" id="pvPoster" role="button" tabindex="0" aria-label="PVを再生"
+        style="background-image:url('https://i.ytimg.com/vi/UhBrzb4VzYQ/hqdefault.jpg')">
+        <span class="pv-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="pv-play-label">Watch the PV</span>
+      </div>
+    </div>
+    <div class="pv-caption">
+      <div class="track">THEME SONG · PV</div>
+      <h3>テクテク♪ローマ</h3>
+      <div class="meta">ガレア鳥 &amp; ローマ兵団 ／ 約2分</div>
+    </div>
+  </div>
+
+  <div class="whc reveal">
+    <div class="whc-head">
+      <div class="whc-eyebrow">Perché Patrimonio Mondiale</div>
+      <h2 class="whc-title">ローマの世界遺産は、<br>なぜ「世界遺産」なのか</h2>
+      <p class="whc-lead">ローマ歴史地区は1980年、教皇領のサン・ピエトロ大聖堂などとともにユネスコ世界遺産に登録されました。「人類共通の宝として、国境を越えて未来へ守り継ぐべき価値がある」と認められた場所です。世界遺産には登録の物差し（登録基準）があり、ローマはそのうち5つを満たす、数少ない遺産のひとつです。</p>
+    </div>
+
+    <div class="whc-list">
+      <div class="whc-item">
+        <h4>「都市そのものが、二千年の歴史書」<br>ってどういうこと？ <span class="lat">Roma · dal 753 a.C.</span></h4>
+        <p>ふつう歴史は、博物館やお城など「ひとつの時代」を切り取って残します。でもローマは違います。ひとつの街の中に、二千年分の時代がそのまま積み重なって、今も人が暮らしているのです。</p>
+        <p>たとえばローマの地面を掘ると、下から古代ローマの道や家の跡が出てきます。だから地下鉄の工事も、遺跡にぶつかって何年も止まるほど。街全体が、めくるページのない「開かれたままの歴史書」なのです。</p>
+        <p>建物も同じです。古代の神殿はそのまま教会に姿を変え、円形劇場は中世に貴族の要塞となり、崩れた遺跡の大理石は次の時代の宮殿の材料に使われました。<span style="color:var(--dawn)">壊して更地にするのではなく、前の時代を土台にして次を建てる</span>——これをローマは二千年くり返してきました。</p>
+        <p>だから街を歩くだけで、古代・中世・ルネサンス・バロック・現代が、角を曲がるたびに入れ替わり立ち替わり現れます。時代がひとつに溶け合ったこの「途切れなさ」こそ、他のどの都市にもないローマだけの価値。ユネスコが真っ先に評価したのも、この一点でした。</p>
+      </div>
+    </div>
+
+    <p class="whc-foot">——ローマとは、二千年をひとつなぎに歩ける、世界でただひとつの街。</p>
+  </div>
+
+  <div class="charm reveal">
+    <div class="charm-hook">
+      <div class="kicker">Perché Roma è unica</div>
+      <h2>なぜ、世界は<br><span class="g">ローマ</span>に恋をするのか。</h2>
+      <p>二千年以上、人が住みつづけ、壊され、また建て直され——それでも歩みを止めなかった街。ローマは「観光地」ではありません。歴史そのものが、今も生活している場所です。知れば知るほど、あなたもきっと戻りたくなる。</p>
+    </div>
+
+    <div class="charm-stats">
+      <div class="stat"><div class="num"><span class="u" style="font-size:.36em;margin-right:.25em;margin-left:0">建国</span>2,777<span class="u">年</span></div><div class="lbl">紀元前753年の建国伝説から<br>数えつづける都市</div></div>
+      <div class="stat"><div class="num">280<span class="u">の噴水</span></div><div class="lbl">今も水を吹き上げる<br>「生きた水の都」</div></div>
+      <div class="stat"><div class="num">世界一<span class="u">小さな国</span></div><div class="lbl">街の中に独立国家<br>バチカン市国</div></div>
+    </div>
+
+    <div class="facts">
+      <div class="fact" data-n="01">
+        <div class="tag">Impossibile · 現代でも不可能</div>
+        <h3>二千年前のコンクリートに、<br>現代の技術がまだ追いつけない。</h3>
+        <p>パンテオンの大ドームは、鉄筋を一切使わない「無筋コンクリート」製。直径43mのこの記録は、<span class="hl">約1900年、いまだ世界一のまま破られていません</span>。ローマン・コンクリートは海水や時間の中でひび割れを自ら修復する——その謎を、現代の科学者がいま必死に解明しようとしています。古代人の技術に、私たちが学んでいるのです。</p>
+      </div>
+
+      <div class="fact" data-n="02">
+        <div class="tag">Città eterna · 途切れない街</div>
+        <h3>建てては壊し、壊しては建てる。<br>それでも二千年、住みつづけた。</h3>
+        <p>ローマの地面を掘れば、下から古代の道が出てくる。だから地下鉄すら簡単に掘れません。神殿は教会になり、円形劇場は要塞になり、宮殿の石は次の時代の壁になった。<span class="hl">「作り直しながら生きる」——この連続性こそ、他のどの遺跡にもない</span>、ローマだけの凄みです。</p>
+      </div>
+
+      <div class="fact" data-n="03">
+        <div class="tag">Nel muro · 壁の中の物語</div>
+        <h3>凱旋門の石に、<br>聖書の一場面が刻まれている。</h3>
+        <p>ティトゥスの凱旋門には、エルサレム神殿から奪われた黄金の燭台メノーラーを運ぶ行進が彫られています。<span class="hl">旧約聖書の世界と古代ローマが、一枚の石の上で交差する</span>瞬間。二千年前の「ニュース映像」が、風化しながらもまだそこにある——歴史が地続きだと、鳥肌が立つはずです。</p>
+      </div>
+
+      <div class="fact" data-n="04">
+        <div class="tag">Una moneta · コインひとつの奇跡</div>
+        <h3>後ろ向きにコインを投げると、<br>また必ずローマに戻れる。</h3>
+        <p>トレビの泉に投げ込まれるコインは、<span class="hl">1日およそ3,000ユーロ、年間150万ユーロ以上</span>。集められたお金は貧しい人々の支援に使われます。願いをかける観光客の小さな一投が、そのまま誰かの明日になる。ローマでは、伝説すらも今を生きているのです。</p>
+      </div>
+
+      <div class="fact" data-n="05">
+        <div class="tag">Stato nello stato · 国の中の国</div>
+        <h3>街の真ん中に、<br>世界一小さな「別の国」がある。</h3>
+        <p>サン・ピエトロ大聖堂の建つバチカン市国は、面積わずか0.49km²、世界最小の独立国家。<span class="hl">道路を一本またぐだけで、パスポートの要らない“国境”を越えられる</span>。使徒ペテロの墓の真上に、二千年かけて世界の信仰の中心が生まれた——街と国と聖地が、ひとつに重なっています。</p>
+      </div>
+    </div>
+
+    <div class="charm-close">
+      <p>ローマは、見る場所ではない。<br>歩いて、触れて、時間の層に<br>迷い込む場所だ。</p>
+      <div class="sig">Tutte le strade portano a Roma</div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<script>
+// hero: logo mark (respect reduced motion)
+(function(){
+  const logo=document.querySelector('.hero-logo img');
+  if(!logo) return;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    logo.style.animation='none';logo.style.opacity='1';logo.style.transform='none';
+  }
+})();
+// hero panorama is shown in full (contain); no parallax zoom applied.
+</script>
+
+<script>
+document.querySelectorAll('.rail-nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const rail=document.getElementById(btn.dataset.rail);
+    const card=rail.querySelector('.card,.person');
+    const step=card?card.getBoundingClientRect().width+24:400;
+    rail.scrollBy({left:step*(+btn.dataset.dir),behavior:'smooth'});
+  });
+});
+// keyboard arrows on rails
+document.querySelectorAll('.rail').forEach(rail=>{
+  rail.addEventListener('keydown',e=>{
+    const card=rail.querySelector('.card,.person');
+    const step=card?card.getBoundingClientRect().width+24:400;
+    if(e.key==='ArrowRight'){e.preventDefault();rail.scrollBy({left:step,behavior:'smooth'})}
+    if(e.key==='ArrowLeft'){e.preventDefault();rail.scrollBy({left:-step,behavior:'smooth'})}
+  });
+});
+// scroll reveal
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+<script>
+(function(){
+  const data = [
+    {"num":"N.01","name":"Colosseo","jp":"コロッセオ","catch":"二千年、立ちっぱなし。",
+     "desc":"五万人を収容した古代最大の円形闘技場。ローマ建築の力を今に伝えます。",
+     "detail":["西暦80年に完成した、周囲約527m・高さ約50mの巨大な石造闘技場です。剣闘士の戦いや猛獣との対決、時には闘技場に水を張った模擬海戦まで行われ、無料の娯楽として市民を熱狂させました。","建設資金には、エルサレム攻略の戦利品が充てられたと伝わります。地下には猛獣や大道具をせり上げる昇降装置の跡が残り、二千年前の「舞台裏」を今も見ることができます。","中世には地震で一部が崩れ、石材は他の建物に転用されました。それでも巨大な骨格は残り、古代ローマの象徴として世界中の人を惹きつけ続けています。"],
+     "facts":[["正式名","フラウィウス円形闘技場"],["完成","西暦80年"],["収容人数","約50,000人"],["構造","石灰華・煉瓦・ローマン・コンクリート"],["登録","ローマ歴史地区（1980年）"]]},
+    {"num":"N.02","name":"Arco di Tito","jp":"ティトゥスの凱旋門","catch":"聖書の物語が、石に刻まれた門。",
+     "desc":"旧約聖書の世界が、一枚の石のレリーフに残る勝利の門。",
+     "detail":["西暦81年、ティトゥス帝のエルサレム攻略を記念して建てられた凱旋門です。フォロ・ロマーノの東端に立ち、高さは約15mあります。","内側の浮き彫りには、エルサレム神殿から奪った黄金の燭台メノーラーを運ぶ凱旋の行進が刻まれています。旧約聖書に登場する聖具が、実在の歴史として石に残る貴重な証拠です。","この門は、後世の凱旋門建築の原型となりました。パリのエトワール凱旋門など、世界中の記念門がこの形を受け継いでいます。"],
+     "facts":[["建造","西暦81年頃"],["高さ","約15m"],["場所","フォロ・ロマーノ"],["見どころ","メノーラーの浮き彫り"],["影響","後世の凱旋門の原型"]]},
+    {"num":"N.04","name":"San Pietro","jp":"サン・ピエトロ大聖堂","catch":"「岩の上に」——約束の大聖堂。",
+     "desc":"使徒ペテロの墓の真上に建つ、キリスト教世界最大級の聖堂。",
+     "detail":["「あなたはペテロ（岩）、この岩の上に私の教会を建てる」——イエスの言葉のとおり、使徒ペテロが葬られたとされる場所の真上に建てられました。","現在の聖堂は16〜17世紀に再建されたものです。ミケランジェロが設計した直径約42mの大クーポラは、ルネサンス建築の頂点とされます。","ラファエロやベルニーニら、時代を代表する巨匠たちが設計や装飾に加わりました。芸術と信仰が一体となった、世界最大級の教会建築です。"],
+     "facts":[["再建完成","1626年"],["ドーム設計","ミケランジェロ"],["ドーム直径","約42m"],["立地","バチカン市国"],["由来","使徒ペテロの墓所"]]},
+    {"num":"N.03","name":"Pantheon","jp":"パンテオン","catch":"二千年前の技術に、今も届かない。",
+     "desc":"鉄筋を使わないコンクリートのドームが、いまだ世界一の万神殿。",
+     "detail":["「すべての神々に捧げる神殿」として西暦2世紀に再建されました。正面の巨大な柱廊の奥に、完全な半球形の空間が広がります。","直径約43mのドームは、鉄筋を一切使わない無筋コンクリート製として、二千年近く世界最大の記録を保っています。頂点の丸い開口（オキュルス）が唯一の光源で、時間とともに光が室内をゆっくり移動します。","7世紀にキリスト教の教会へ姿を変えたことで破壊をまぬがれ、古代ローマの建物としては奇跡的に完全な形で今に残りました。「神殿が教会になる」ローマらしさの象徴です。"],
+     "facts":[["再建","西暦2世紀（ハドリアヌス帝）"],["ドーム直径","約43m"],["構造","無筋コンクリート"],["特徴","天井のオキュルス"],["記録","世界最大の無筋ドーム"]]},
+    {"num":"N.05","name":"San Paolo f.l.m.","jp":"サン・パオロ・フオーリ・レ・ムーラ聖堂","catch":"城壁の外、パウロの眠る場所。",
+     "desc":"使徒パウロの墓の上に建つ、ローマ四大バシリカのひとつ。",
+     "detail":["「城壁の外の聖パウロ」という名のとおり、ローマの城壁の外、使徒パウロが殉教し葬られたとされる場所に建てられた大聖堂です。","4世紀の創建で、ローマの四大バシリカのひとつ。19世紀の火災で大きな被害を受けましたが、各国の協力で忠実に再建されました。長い列柱と、歴代教皇の肖像が並ぶ内部で知られます。","ペテロにサン・ピエトロがあるように、パウロにはこの聖堂があります。二人の使徒の墓所が、ローマの信仰の二本柱となっています。"],
+     "facts":[["名の意味","城壁の外の聖パウロ"],["創建","4世紀"],["格","ローマ四大バシリカ"],["由来","使徒パウロの墓所"],["見どころ","列柱と歴代教皇の肖像"]]},
+    {"num":"N.06","name":"Foro Romano","jp":"フォロ・ロマーノ","catch":"古代ローマの、心臓だった広場。",
+     "desc":"政治・宗教・商いが集った、古代都市の中心広場の跡。",
+     "detail":["古代ローマの政治・宗教・経済の中心だった広場です。神殿、元老院、バシリカ、凱旋門が立ち並び、市民生活と国家の営みがここで交わりました。","ティトゥスの凱旋門もこの広場の一角に立っています。共和政から帝政まで、ローマ史の主要な出来事の舞台となった場所です。","時代とともに埋もれ、家畜の放牧地になっていた時期もありました。発掘によって層状に重なる歴史が姿を現し、「二千年の歴史書」を最も体感できる場所となっています。"],
+     "facts":[["役割","古代ローマの中心広場"],["含む遺構","神殿・元老院・凱旋門"],["時代","共和政〜帝政"],["別名","フォルム・ロマヌム"],["見どころ","ティトゥスの凱旋門ほか"]]}
+  ];
+  const vp=document.getElementById('scViewport');
+  const slides=[...vp.querySelectorAll('.b-slide')];
+  const dots=[...vp.querySelectorAll('.b-dot')];
+  const textEl=document.getElementById('bText');
+  const numEl=document.getElementById('bNum');
+  let cur=0, timer=null, animateEntrance=false;
+  function render(i){
+    const d=data[i];
+    numEl.textContent=String(i+1).padStart(2,'0');
+    // rebuild text with fresh nodes so animation replays
+    textEl.innerHTML='';
+    const parts=[
+      ['div','roman-name',d.name],
+      ['h3','',d.jp.split('（')[0]],
+      ['div','jp',d.num+' ／ '+d.jp],
+      ['div','catch',d.catch],
+      ['p','',d.desc]
+    ];
+    parts.forEach(([tag,cls,txt])=>{const e=document.createElement(tag);if(cls)e.className=cls;e.textContent=txt;textEl.appendChild(e);});
+    // details button -> open detail page
+    if(d.detail&&d.detail.length){
+      const btn=document.createElement('button');
+      btn.className='b-more';btn.type='button';
+      btn.innerHTML='詳細を見る <span class="arr">&#8594;</span>';
+      btn.addEventListener('click',()=>{
+        const imgEl=slides[i].querySelector('img');
+        window.RomaDetail.open({
+          img: imgEl?imgEl.src:'',
+          eyebrow: d.name,
+          title: d.jp,
+          sub: d.num,
+          catch: d.catch,
+          detail: d.detail,
+          facts: d.facts,
+          factsHead: 'World Heritage'
+        });
+      });
+      textEl.appendChild(btn);
+    }
+    slides.forEach((s,si)=>{
+      const on=si===i;
+      s.classList.toggle('active',on);
+      if(on){ s.classList.remove('anim'); void s.offsetWidth; if(animateEntrance) s.classList.add('anim'); }
+      else { s.classList.remove('anim'); }
+    });
+    dots.forEach((dd,di)=>dd.classList.toggle('on',di===i));
+    cur=i;
+  }
+  function go(dir){render((cur+dir+data.length)%data.length);}
+  function to(i){render(i);}
+  document.getElementById('bPrev').onclick=()=>{go(-1);restart();};
+  document.getElementById('bNext').onclick=()=>{go(1);restart();};
+  dots.forEach(d=>d.onclick=()=>{to(+d.dataset.i);restart();});
+  // swipe / drag
+  let x0=null;
+  const start=x=>x0=x;
+  const end=x=>{if(x0===null)return;const dx=x-x0;if(Math.abs(dx)>40){dx<0?go(1):go(-1);restart();}x0=null;};
+  vp.addEventListener('touchstart',e=>start(e.touches[0].clientX),{passive:true});
+  vp.addEventListener('touchend',e=>end(e.changedTouches[0].clientX),{passive:true});
+  vp.addEventListener('mousedown',e=>start(e.clientX));
+  window.addEventListener('mouseup',e=>{if(x0!==null)end(e.clientX);});
+  // keyboard
+  vp.setAttribute('tabindex','0');
+  vp.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){go(-1);restart();}if(e.key==='ArrowRight'){go(1);restart();}});
+  // autoplay
+  function restart(){clearInterval(timer);timer=setInterval(()=>go(1),5500);}
+  // start when scrolled into view
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){restart();}else{clearInterval(timer);}})},{threshold:.3});
+  io.observe(vp);
+  render(0);
+  requestAnimationFrame(()=>{animateEntrance=true;});
+})();
+</script>
+
+
+<script>
+(function(){
+  const data=[
+    {"name":"Pietro","jp":"使徒ペテロ","catch":"漁師から、岩へ。","era":"†64頃 · ROMA",
+     "desc":"ガリラヤ湖の漁師から、教会の礎となった十二使徒の筆頭。",
+     "detail":["もとはガリラヤ湖の漁師シモンでした。イエスに従い、「あなたはペテロ（岩）、この岩の上に私の教会を建てる」と新しい名を与えられます。","ローマで宣教し、皇帝ネロの迫害のなか殉教したと伝わります。自ら「イエスと同じ姿では畏れ多い」と願い、逆さ十字にかけられたという伝承も残ります。","その墓の真上に建てられたのが、サン・ピエトロ大聖堂です。初代ローマ教皇とされ、今に続く歴代教皇の原点となりました。"],
+     "facts":[["出身","ガリラヤの漁師"],["別名","シモン／ケファ（岩）"],["殉教","西暦64年頃・ローマ"],["象徴","天の国の鍵"],["ゆかり","サン・ピエトロ大聖堂"]]},
+    {"name":"Paolo","jp":"使徒パウロ","catch":"手紙で、世界を変えた。","era":"†67頃 · ROMA",
+     "desc":"「ローマ人への手紙」で知られる、キリスト教を世界へ広げた伝道者。",
+     "detail":["もとはキリスト教を激しく迫害していた人物でした。ダマスコへ向かう途上での劇的な回心をきっかけに、最も熱心な伝道者へと生まれ変わります。","地中海世界を何度も旅し、各地の教会に宛てて書いた手紙は、新約聖書の大きな部分を占めています。その思想は、キリスト教が世界宗教へ広がる土台となりました。","囚人としてアッピア街道を歩いてローマへ護送され、城壁の外で殉教したと伝わります。その地には現在、サン・パオロ・フオーリ・レ・ムーラ聖堂が建っています。"],
+     "facts":[["出身","タルソス（現トルコ）"],["転機","ダマスコ途上の回心"],["著作","ローマ人への手紙 ほか"],["殉教","西暦67年頃・ローマ"],["象徴","剣と書物"]]},
+    {"name":"Costantino","jp":"皇帝コンスタンティヌス","catch":"ローマを、キリスト教の側へ。","era":"272–337 · ROMA",
+     "desc":"迫害の時代を終わらせ、キリスト教を公認したローマ皇帝。",
+     "detail":["長く迫害されてきたキリスト教を、313年のミラノ勅令で公認したローマ皇帝です。これにより、信仰は日陰の存在から、やがて帝国の中心へと歩み出しました。","使徒ペテロの墓の上に最初のサン・ピエトロ聖堂を、パウロの墓の上にサン・パオロ聖堂を建てさせたと伝わります。今日の大聖堂の原点をつくった人物です。","都をコンスタンティノープル（現イスタンブール）へ移し、古代ローマから中世世界へと時代を大きく動かしました。ローマの歴史の“転換点”に立つ皇帝です。"],
+     "facts":[["在位","306–337年"],["功績","ミラノ勅令（313年）"],["建立","サン・ピエトロ／サン・パオロの原型"],["遷都","コンスタンティノープル"],["象徴","月桂冠と十字架"]]}
+  ];
+  const root=document.getElementById('pplViewport');
+  const slides=[...root.querySelectorAll('.b-slide')];
+  const dots=[...root.querySelectorAll('.b-dot')];
+  const textEl=document.getElementById('pplText');
+  const numEl=document.getElementById('pplNum');
+  let cur=0,timer=null,animateEntrance=false;
+  function render(i){
+    const d=data[i];
+    numEl.textContent=String(i+1).padStart(2,'0');
+    textEl.innerHTML='';
+    const parts=[['div','roman-name',d.era],['h3','',d.jp],['div','jp',d.name],['div','catch',d.catch],['p','',d.desc]];
+    parts.forEach(([t,c,x])=>{const e=document.createElement(t);if(c)e.className=c;e.textContent=x;textEl.appendChild(e);});
+    if(d.detail&&d.detail.length){
+      const btn=document.createElement('button');
+      btn.className='b-more';btn.type='button';
+      btn.innerHTML='詳細を見る <span class="arr">&#8594;</span>';
+      btn.addEventListener('click',()=>{
+        const imgEl=slides[i].querySelector('img');
+        window.RomaDetail.open({
+          img: imgEl?imgEl.src:'',
+          eyebrow: d.era,
+          title: d.jp,
+          sub: d.name,
+          catch: d.catch,
+          detail: d.detail,
+          facts: d.facts,
+          factsHead: 'Profilo'
+        });
+      });
+      textEl.appendChild(btn);
+    }
+    slides.forEach((s,si)=>{
+      const on=si===i;
+      s.classList.toggle('active',on);
+      if(on){ s.classList.remove('anim'); void s.offsetWidth; if(animateEntrance) s.classList.add('anim'); }
+      else { s.classList.remove('anim'); }
+    });
+    dots.forEach((dd,di)=>dd.classList.toggle('on',di===i));
+    cur=i;
+  }
+  function go(dir){render((cur+dir+data.length)%data.length);}
+  document.getElementById('pplPrev').onclick=()=>{go(-1);restart();};
+  document.getElementById('pplNext').onclick=()=>{go(1);restart();};
+  dots.forEach(d=>d.onclick=()=>{render(+d.dataset.i);restart();});
+  let x0=null;
+  root.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+  root.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){dx<0?go(1):go(-1);restart();}x0=null;},{passive:true});
+  root.addEventListener('mousedown',e=>x0=e.clientX);
+  window.addEventListener('mouseup',e=>{if(x0!==null){const dx=e.clientX-x0;if(Math.abs(dx)>40){dx<0?go(1):go(-1);restart();}x0=null;}});
+  root.setAttribute('tabindex','0');
+  root.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){go(-1);restart();}if(e.key==='ArrowRight'){go(1);restart();}});
+  function restart(){clearInterval(timer);timer=setInterval(()=>go(1),5500);}
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)restart();else clearInterval(timer);});},{threshold:.3});
+  io.observe(root);
+  render(0);
+  requestAnimationFrame(()=>{animateEntrance=true;});
+})();
+
+/* PV poster: tap to load & play the YouTube video */
+(function(){
+  const poster=document.getElementById('pvPoster');
+  const frame=document.getElementById('pvFrame');
+  if(!poster||!frame)return;
+  function play(){
+    const f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/UhBrzb4VzYQ?rel=0&autoplay=1&playsinline=1';
+    f.title='テクテク♪ローマ PV';
+    f.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    f.setAttribute('referrerpolicy','strict-origin-when-cross-origin');
+    f.setAttribute('allowfullscreen','');
+    frame.innerHTML='';
+    frame.appendChild(f);
+  }
+  poster.addEventListener('click',play);
+  poster.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});
+})();
+</script>
+
+<!-- ===== DETAIL PAGE (overlay) ===== -->
+<div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-label="詳細">
+  <div class="dm-bar">
+    <span class="brand">ローマの記憶</span>
+    <button class="dm-close" id="dmClose" aria-label="閉じる">&times;</button>
+  </div>
+  <div class="dm-inner">
+    <div class="dm-hero"><img id="dmImg" src="" alt=""></div>
+    <div style="text-align:center">
+      <div class="dm-eyebrow" id="dmEyebrow"></div>
+      <h2 class="dm-title" id="dmTitle"></h2>
+      <div class="dm-sub" id="dmSub"></div>
+      <div class="dm-catch" id="dmCatch"></div>
+    </div>
+    <div class="dm-divider"></div>
+    <div class="dm-body" id="dmBody"></div>
+    <div class="dm-facts" id="dmFacts" hidden>
+      <h5 id="dmFactsHead">Data</h5>
+      <dl id="dmFactsList"></dl>
+    </div>
+  </div>
+</div>
+
+<script>
+/* shared detail-page overlay */
+window.RomaDetail=(function(){
+  const modal=document.getElementById('detailModal');
+  const img=document.getElementById('dmImg');
+  const eye=document.getElementById('dmEyebrow');
+  const title=document.getElementById('dmTitle');
+  const sub=document.getElementById('dmSub');
+  const catchEl=document.getElementById('dmCatch');
+  const body=document.getElementById('dmBody');
+  const facts=document.getElementById('dmFacts');
+  const factsHead=document.getElementById('dmFactsHead');
+  const factsList=document.getElementById('dmFactsList');
+  let lastFocus=null;
+  function open(d){
+    lastFocus=document.activeElement;
+    img.src=d.img||''; img.alt=d.title||'';
+    img.style.display=d.img?'':'none';
+    eye.textContent=d.eyebrow||'';
+    title.textContent=d.title||'';
+    sub.textContent=d.sub||'';
+    catchEl.textContent=d.catch||'';
+    body.innerHTML='';
+    (d.detail||[]).forEach(t=>{const p=document.createElement('p');p.textContent=t;body.appendChild(p);});
+    factsList.innerHTML='';
+    if(d.facts&&d.facts.length){
+      d.facts.forEach(([k,v])=>{const dt=document.createElement('dt');dt.textContent=k;const dd=document.createElement('dd');dd.textContent=v;factsList.appendChild(dt);factsList.appendChild(dd);});
+      factsHead.textContent=d.factsHead||'Data';
+      facts.hidden=false;
+    } else { facts.hidden=true; }
+    modal.classList.add('open');
+    document.body.classList.add('modal-open');
+    modal.scrollTop=0;
+    document.getElementById('dmClose').focus();
+  }
+  function close(){
+    modal.classList.remove('open');
+    document.body.classList.remove('modal-open');
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  document.getElementById('dmClose').addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close();});
+  return {open,close};
+})();
+</script>
+</body>
+</html>
